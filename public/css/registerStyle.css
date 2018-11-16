@@ -1,0 +1,134 @@
+
+.main-forms {
+    margin: 10px;
+}
+
+.main-forms-column1 {
+    display: grid;
+    grid-area: column1;
+    justify-items: center;
+}
+
+.main-forms-column2 {
+    display: grid;
+    grid-area: column2;
+    justify-items: center;
+}
+
+.main-forms button {
+    grid-area: confButton;
+    margin-top: 10px;
+    justify-self: center;
+}
+
+.main-forms h2 {
+    text-align: center;
+}
+
+.main-forms-wrapper-outer {
+    display: grid;
+    grid-template-rows: 2fr 3fr 1fr;
+    grid-template-areas: "column1" "column2" "confButton";
+}
+
+.main-forms label {
+    display: block;
+}
+
+.main-forms input {
+    display: block;
+}
+
+@media (min-width: 530px) and (max-width: 767px) {
+
+    .main-forms {
+        margin: 10px;
+    }
+
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+    .main-forms {
+        margin: 10px;
+    }
+
+}
+
+@media (min-width: 991px) and (max-width: 1199px) {
+
+    .main-forms {
+        display: block;
+        height: 65%;
+        margin-top: 15vh;
+
+    }
+
+    .main-forms-wrapper-outer {
+        height: 100%;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 60vh 10vh;
+        grid-template-areas: "column1 column2" "confButton confButton";
+        justify-items: center;
+    }
+
+    .main-forms-column1 {
+        display: block;
+        grid-area: column1;
+    }
+
+    .main-forms-column2 {
+        display: block;
+        grid-area: column2;
+    }
+
+    .main-forms button {
+        grid-area: confButton;
+        margin-top: 10px;
+        justify-self: center;
+    }
+
+    .main-forms h2 {
+        text-align: center;
+    }
+}
+
+@media (min-width: 1200px) {
+
+    .main-forms {
+        display: block;
+        height: 85%;
+        margin-top: 10vh;
+
+    }
+
+    .main-forms-wrapper-outer {
+        height: 100%;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 65vh 10vh;
+        grid-template-areas: "column1 column2" "confButton confButton";
+        justify-items: center;
+    }
+
+    .main-forms-column1 {
+        display: block;
+        grid-area: column1;
+    }
+
+    .main-forms-column2 {
+        display: block;
+        grid-area: column2;
+    }
+
+    .main-forms button {
+        grid-area: confButton;
+        margin-top: 10px;
+        justify-self: center;
+    }
+
+    .main-forms h2 {
+        text-align: center;
+    }
+
+}

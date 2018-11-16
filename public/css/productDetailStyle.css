@@ -1,0 +1,183 @@
+
+/*product detail layout*/
+.product-info{
+    display: grid;
+    grid-area: productInfo;
+    grid-template-columns: 1fr 1fr 1.5fr;
+    grid-template-areas: "mainImg mainImg mainImg"
+    "smallImg1 smallImg1 smallImg2"
+    "name name ratingBig"
+    "desc desc desc"
+    "price amount buyButton";
+}
+.content{
+    margin: 0 2vw 0 2vw;
+}
+.main-img{
+    grid-area: mainImg;
+}
+.side-img1{
+    grid-area: smallImg1;
+}
+.side-img2{
+    grid-area: smallImg2;
+}
+.product-name{
+    grid-area: name;
+}
+.rating-big{
+    grid-area: ratingBig;
+}
+.product-desc{
+    grid-area: desc;
+}
+.product-price{
+    grid-area: price;
+}
+.product-amount{
+    grid-area: amount;
+}
+.product-amount input{
+    width: 30px;
+    height: 30px;
+    margin: 0 1vw 0 1vw;
+}
+#buyButton{
+    grid-area: buyButton;
+}
+/*add review layout*/
+.add-review{
+    grid-area: addReview;
+    padding: 10px;
+}
+.new-review{
+    width: 90vw;
+    height: 20vh;
+    overflow-y: scroll;
+}
+.add-review-controls{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+.rating{
+    justify-self: start;
+    grid-row: 1/2;
+    grid-column: 1/2;
+}
+#addReview{
+    justify-self: end;
+    grid-row: 1/2;
+    grid-column: 2/3;
+}
+.reviews{
+    grid-area: reviews;
+    border-top: lightcoral solid 2px ;
+    padding: 10px;
+}
+@media (min-width:576px) and (max-width:767px) {
+
+}
+
+@media (min-width:768px) and (max-width:991px) {
+    .product-info{
+        display: grid;
+        grid-area: productInfo;
+        grid-template-columns: 1fr 1fr 1.5fr;
+        grid-template-areas: "mainImg mainImg smallImg1"
+        "mainImg mainImg smallImg2"
+        "name name ratingBig"
+        "desc desc desc"
+        "price amount buyButton";
+    }
+
+    .main-img{
+        min-width: 58vw;
+    }
+    .side-img1, .side-img2{
+        min-width: 29vw;
+    }
+
+}
+
+@media (min-width:992px) and (max-width: 1199px) {
+
+    .left-ctg-menu{
+        display: block;
+        position: sticky;
+        top: 8vh;
+    }
+    .new-review{
+        width: 70%;
+        height: 20vh;
+    }
+    .content{
+        margin: 0;
+        display: grid;
+        grid-template-columns: 1.5fr 2.5fr;
+        grid-auto-rows: minmax(min-content,max-content);
+        grid-template-areas:
+                "menu productInfo"
+                ". addReview"
+                ". reviews"
+    }
+    .product-info{
+        margin: 0 2vw 0 2vw;
+        display: grid;
+        grid-area: productInfo;
+        grid-template-columns: 1fr 1fr 1.5fr;
+        grid-template-areas: "mainImg mainImg smallImg1"
+        "mainImg mainImg smallImg2"
+        "name name ratingBig"
+        "desc desc desc"
+        "price amount buyButton";
+    }
+    .main-img{
+        min-width: 37vw;
+    }
+    .side-img1, .side-img2{
+        min-width: 18.5vw;
+    }
+
+}
+
+@media (min-width:1200px){
+    .left-ctg-menu{
+        display: block;
+        position: sticky;
+        top: 8vh;
+    }
+    .new-review{
+        width: 70%;
+        height: 20vh;
+    }
+    .content{
+        margin: 0;
+        display: grid;
+        grid-template-columns: 1fr 3fr;
+        grid-auto-rows: minmax(min-content,max-content);
+        grid-template-areas:
+                "menu productInfo"
+                ". addReview"
+                ". reviews"
+    }
+    .product-info{
+        margin: 0 2vw 0 2vw;
+        display: grid;
+        grid-area: productInfo;
+        grid-template-columns: 1fr 1fr 1.5fr;
+        grid-template-areas:
+                "mainImg mainImg smallImg1"
+                "mainImg mainImg smallImg2"
+                "name name ratingBig"
+                "desc desc desc"
+                "price amount buyButton";
+    }
+    .main-img{
+        min-width: 37vw;
+    }
+    .side-img1, .side-img2{
+        min-width: 18.5vw;
+    }
+
+
+}

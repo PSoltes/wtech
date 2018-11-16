@@ -1,0 +1,58 @@
+* {
+    box-sizing: border-box;
+}
+
+html {
+    font-family: "SansSerif";
+}
+
+.main-forms {
+    padding: 5vh;
+    height: 70%;
+    min-height: 70vh;
+    display: grid;
+    align-items: center;
+}
+
+.main-forms-inwrapper {
+    text-align: center;
+    margin: auto;
+}
+
+.main-forms input {
+    display: block;
+    margin: auto;
+
+}
+.main-forms #remember{
+    display: inline-block;
+}
+a{
+    display: block;
+}
+
+.main-forms button {
+    display: block;
+    margin: auto;
+}
+
+@media (min-width: 576px) and (max-width: 767px) {
+
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+
+}
+
+@media (min-width: 992px) and (max-width: 1199px) {
+
+}
+
+@media (min-width: 1200px) {
+
+    .main-forms-wrapper {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+    }
+
+}
