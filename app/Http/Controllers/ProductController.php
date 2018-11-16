@@ -11,11 +11,12 @@ class ProductController extends Controller
     /**
      * Display a listing of the resource.
      *
+     *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        //
+
     }
 
     /**
@@ -47,8 +48,7 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
-        $categories = Category::all();
-        return view('productDetail', compact('product', $product), compact('categories', $categories));
+        return view('productDetail', compact('product', $product));
     }
 
     /**

@@ -16,8 +16,7 @@ class IndexController extends Controller
     public function index()
     {
         $products = Product::all();
-        $categories = Category::all();
-        return view('welcome', compact('products',$products), compact('categories', $categories));
+        return view('welcome', compact('products',$products));
     }
 
     /**
@@ -44,12 +43,14 @@ class IndexController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Product  $product
+     *
+     * @param \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function show(Product $product)
+    public function show($categoryName, Request $request)
     {
-        return view('productDetail', compact('product', $product));
+        $products = Product::where('category', $categoryName)->get();
+        return view('category', compact('products', $products));
     }
 
     /**

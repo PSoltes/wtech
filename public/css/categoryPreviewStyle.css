@@ -1,0 +1,199 @@
+
+/*big-screen-category-menu*/
+.left-ctg-menu {
+    top: 8vh;
+    position: sticky;
+
+}
+.radio{
+    display: inline-block;
+    margin: auto;
+}
+/*filtre*/
+.filtre {
+    grid-area: filter;
+}
+.sort{
+    display: flex;
+    flex-direction: row;
+    justify-items: start;
+}
+.filter-submit-button{
+    width: 100px;
+    margin: auto;
+}
+.input-group{
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
+    max-width: 80vw;
+    width: 70%;
+    margin: 10px auto 10px auto;
+    padding: 0 2vw 0 2vw;
+}
+.sort-button{
+    transition: 0.3s ease;
+}
+.sort-button.active{
+    background-color: lightcoral;
+    color: #252525;
+}
+.order-filter{
+    padding: 0 2vw 0 2vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 30px 0 30px 0;
+}
+/*product-thumbnail*/
+.main-products-section a{
+    color:#252525;
+}
+.main-products-section a:active, .main-products-section a:hover{
+    color:#252525;
+    text-decoration: none;
+}
+.product-thumbnail{
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas:
+            "TImg TImg"
+            "PName PName"
+            "PDesc PDesc"
+            "Price BuyButton";
+    margin-bottom: 10px;
+    padding: 5px;
+    border: lightgrey solid 2px;
+}
+.product-thumbnail:hover{
+    background-color: lightgrey;
+}
+
+.thumbnail-pic{
+    grid-area: TImg;
+    justify-self: center;
+}
+.product-name{
+    grid-area: PName;
+}
+
+.product-desc{
+    grid-area: PDesc;
+}
+.buy-product{
+    grid-area: BuyButton;
+    justify-self: end;
+    margin: 5px;
+    z-index: 2;
+}
+.product-price{
+    grid-area: Price;
+}
+/*products-container*/
+.main-products-section{
+    border-top: lightcoral 2px solid;
+}
+/*nadpis*/
+.ctg-name{
+    grid-area: name;
+    border-bottom: lightcoral solid 2px;
+    margin: 0px;
+    background-color: #252525;
+    color: lightskyblue;
+    padding: 2vh;
+}
+@media (min-width:576px) and (max-width: 767px){
+    .main-products-section{
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-gap: 20px;
+        padding: 25px;
+        margin: 0;
+    }
+    .order-filter{
+        flex-direction: row;
+    }
+
+}
+@media (min-width:768px) and (max-width: 991px) {
+    .main-products-section{
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-gap: 20px;
+        padding: 25px;
+        margin: 0;
+    }
+
+    .order-filter{
+        flex-direction: row;
+    }
+
+}
+@media (min-width:992px) and (max-width: 1199px) {
+    .content{
+        display: grid;
+        grid-template-columns: 1fr 3fr;
+        grid-auto-rows: minmax(min-content,max-content);
+        grid-template-areas:
+                "menu name"
+                "menu filter"
+                "menu productThmb"
+                ". productThmb"
+    }
+    .main-products-section{
+        display: grid;
+        grid-area: productThmb;
+        grid-template-columns: repeat(2, 1fr);
+        grid-gap: 20px;
+        padding: 25px;
+        margin: 0;
+    }
+    .left-ctg-menu{
+        display: block;
+    }
+    .price-range-filter{
+        display: flex;
+        flex-direction: row;
+    }
+    .order-filter{
+        flex-direction: row;
+    }
+
+}
+@media (min-width:1200px){
+
+    .content{
+        display: grid;
+        grid-template-columns: 1fr 3fr;
+        grid-auto-rows: minmax(min-content,max-content);
+        grid-template-areas:
+                "menu name"
+                "menu filter"
+                "menu productThmb"
+                ". productThmb"
+    }
+    .main-products-section{
+        display: grid;
+        grid-area: productThmb;
+        grid-template-columns: repeat(3, 1fr);
+        grid-gap: 20px;
+        padding: 25px;
+        margin: 0;
+    }
+    .left-ctg-menu{
+        display: block;
+    }
+
+    .price-range-filter{
+        display: flex;
+        flex-direction: row;
+    }
+    .order-filter{
+        flex-direction: row;
+        justify-content: start;
+    }
+    .radio{
+        margin: 10px;
+    }
+
+}

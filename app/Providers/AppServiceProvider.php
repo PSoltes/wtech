@@ -2,8 +2,10 @@
 
 namespace App\Providers;
 
+use App\Category;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\View;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -14,6 +16,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        $categories = Category::all();
+        View::share('categories', $categories);
         Validator::extend('phone_number', function($attribute, $value, $parameters)
         {
             return $value[0] == '+' && strlen($value) == 13;

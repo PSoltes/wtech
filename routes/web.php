@@ -13,10 +13,8 @@
 
 Route::resource('users', 'UserController');
 Route::resource('products', 'ProductController');
-Route::resource('/', 'IndexController');
+Route::get('/', 'IndexController@index');
+Route::get('/{categoryName}/', 'IndexController@show');
+
 
 Auth::routes();
-
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');

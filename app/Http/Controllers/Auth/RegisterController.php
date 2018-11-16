@@ -41,12 +41,6 @@ class RegisterController extends Controller
         $this->middleware('guest');
     }
 
-    public function showRegistrationForm()
-    {
-        $categories = Category::all();
-
-        return view('auth.register', compact('categories', $categories));
-    }
 
     /**
      * Get a validator for an incoming registration request.

@@ -27,12 +27,6 @@ class LoginController extends Controller
      * @var string
      */
 
-    public function showLoginForm()
-    {
-        $categories = Category::all();
-
-        return view('auth.login', compact('categories', $categories));
-    }
     protected $redirectTo = '/';
 
     /**
