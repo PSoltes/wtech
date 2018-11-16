@@ -43,13 +43,24 @@ class IndexController extends Controller
     /**
      * Display the specified resource.
      *
-     *
+     * @param \App\Product
      * @param \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function show($categoryName, Request $request)
+    public function show($categoryName, Request $request, Product $products)
     {
-        $products = Product::where('category', $categoryName)->get();
+        $products = $products->newQuery();
+        if($request->has('order')){
+            $products->orderBy('price', $request->input('order'));
+        }
+        if(!empty($request->input('priceFrom'))){
+            $products->where('price', '>=', intval($request->input('priceFrom'),10));
+        }
+        if(!empty($request->input('priceTo'))){
+            $products->where('price', '<=', intval($request->input('priceTo'),10));
+        }
+         $products = $products->where('category', $categoryName)->get();
+
         return view('category', compact('products', $products));
     }
 
