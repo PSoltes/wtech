@@ -32,11 +32,9 @@
             <ul>
                 <li><a href="javascript:void(0)" class="closebtn" onclick="closeNav()"><i class="fas fa-times"></i>
                     </a></li>
-                <li><a href="../html/categoryPreview.html">Luky</a></li>
-                <li><a href="">Šípy</a></li>
-                <li><a href="">Príslušenstvo</a></li>
-                <li><a href="">Terčovnice</a></li>
-                <li><a href="">Oblečenie</a></li>
+                    @foreach($categories as $category)
+                        <li><a href="{{url('/'. $category->name)}}">{{$category->name}}</a></li>
+                    @endforeach
             </ul>
         </nav>
     </div>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use App\Category;
 
 class LoginController extends Controller
 {
@@ -25,6 +26,13 @@ class LoginController extends Controller
      *
      * @var string
      */
+
+    public function showLoginForm()
+    {
+        $categories = Category::all();
+
+        return view('auth.login', compact('categories', $categories));
+    }
     protected $redirectTo = '/';
 
     /**
