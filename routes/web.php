@@ -12,9 +12,10 @@
 */
 
 Route::resource('users', 'UserController');
-Route::resource('products', 'ProductController');
+//Route::resource('products', 'ProductController');
 Route::get('/', 'IndexController@index');
-Route::get('/{categoryName}/', 'IndexController@show');
-
+Route::get('/{categoryName}', 'IndexController@show');
+Route::get('products/{product}', 'ProductController@show');
+Route::get('product/addToCart', 'ProductController@addToCart');
 
 Auth::routes();

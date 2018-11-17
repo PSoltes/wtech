@@ -8,15 +8,21 @@
 @section('content')
     <section class="main-products-section">
        @foreach($products as $product)
-            <a href="{{url('products/'.$product->id)}}">
                 <article class="product-thumbnail">
-                    <img class="thumbnail-pic" alt="obrazok produktu" src="{{asset('img/'. $product->imgsource .'/sxs_main-img.jpg')}}">
-                    <h1 class="product-name">{{$product->name}}</h1>
-                    <p class="product-desc">{{$product->description}}</p>
-                    <button class="white-bcg-button buy-product" type="button">Pridaj do kosika</button>
-                    <p class="product-price">{{$product->price}}£</p>
+                    <a class="thumbnail-pic" href="{{url('products/'.$product->id)}}">
+                        <img alt="obrazok produktu" src="{{asset('img/'. $product->imgsource .'/sxs_main-img.jpg')}}">
+                    </a>
+                    <h1 class="product-name">
+                        <a href="{{url('products/'.$product->id)}}">{{$product->name}}</a>
+                    </h1>
+                        <p class="product-desc">{{$product->description}}</p>
+                        <p class="product-price">{{$product->price}}£</p>
+                    <form type="get" action="{{ url('product/addToCart') }}">
+                        <input type="hidden" value="1" name="amnt">
+                        <input type="hidden" value="{{$product->id}}" name="id">
+                        <button class="white-bcg-button buy-product" type="submit">Pridaj do kosika</button>
+                    </form>
                 </article>
-            </a>
         @endforeach
     </section>
     <div class="carousel">
