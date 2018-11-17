@@ -1,14 +1,15 @@
 @extends('basic_layout.app')
 @section('additional_dependencies')
     <link rel="stylesheet" href="{{asset('css/categoryPreviewStyle.css')}}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 @endsection
 @section('content')
     <form class="filtre" id="filtre" method="get">
         <div class="price-range-filter">
-            <div class="input-group">
+            <div class="input-group-custom">
                 <label for="price-box1">Cena od</label><input type="text" class="form-control" id="price-box1" name="priceFrom">
             </div>
-            <div class="input-group">
+            <div class="input-group-custom">
                 <label for="price-box2">Cena do</label><input type="text" class="form-control" id="price-box2" name="priceTo">
             </div>
         </div>
@@ -18,7 +19,7 @@
             <span class="radio"><input type="radio" id="expensive" name="order"><label for="expensive">Najdrahsie</label></span>
             <span class="radio"><input type="radio" id="popular" name="order"><label for="popular">Najoblubenejsie</label></span>
         </div>
-        <div class="input-group">
+        <div class="input-group-custom">
             <button type="button" class="white-bcg-button filter-submit-button">Filtruj</button>
         </div>
     </form>
@@ -37,4 +38,7 @@
             <p>V tejto sekcii nie su ziadne produkty</p>
             @endforelse
     </section>
+    <nav class="pagination-wrapper">
+        {{$products->links()}}
+    </nav>
 @endsection

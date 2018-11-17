@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Category;
 use Illuminate\Http\Request;
 use App\Product;
 
@@ -59,7 +58,7 @@ class IndexController extends Controller
         if(!empty($request->input('priceTo'))){
             $products->where('price', '<=', intval($request->input('priceTo'),10));
         }
-         $products = $products->where('category', $categoryName)->get();
+        $products = $products->where('category', $categoryName)->simplePaginate(12);
 
         return view('category', compact('products', $products));
     }

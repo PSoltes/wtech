@@ -9,6 +9,12 @@
     display: inline-block;
     margin: auto;
 }
+
+.pagination-wrapper {
+    display: flex;
+    justify-content: center;
+    grid-area: pagination;
+}
 /*filtre*/
 .filtre {
     grid-area: filter;
@@ -22,7 +28,8 @@
     width: 100px;
     margin: auto;
 }
-.input-group{
+
+.input-group-custom {
     display: flex;
     flex-direction: column;
     justify-items: center;
@@ -97,7 +104,7 @@
 .ctg-name{
     grid-area: name;
     border-bottom: lightcoral solid 2px;
-    margin: 0px;
+    margin: 0;
     background-color: #252525;
     color: lightskyblue;
     padding: 2vh;
@@ -137,8 +144,7 @@
         grid-template-areas:
                 "menu name"
                 "menu filter"
-                "menu productThmb"
-                ". productThmb"
+                "menu productThmb" ". productThmb" ". pagination"
     }
     .main-products-section{
         display: grid;
@@ -169,8 +175,7 @@
         grid-template-areas:
                 "menu name"
                 "menu filter"
-                "menu productThmb"
-                ". productThmb"
+                "menu productThmb" ". productThmb" ". pagination"
     }
     .main-products-section{
         display: grid;
