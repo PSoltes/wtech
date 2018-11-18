@@ -14,10 +14,10 @@ class User extends Authenticatable
 
     public function orders()
     {
-        return $this->belongsToMany('app\Order')->withTimestamps();
+        return $this->hasMany('app\Order')->withTimestamps();
     }
     public function products()
     {
-        return $this->belongsToMany('app\Product')->withTimestamps();
+        return $this->hasMany('app\Product')->withTimestamps()->withPivot('amount');
     }
 }

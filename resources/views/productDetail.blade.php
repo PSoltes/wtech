@@ -45,9 +45,13 @@
             </span>
         <p class="product-desc">{{$product->description}}</p>
         <span class="product-price">{{$product->price}}£</span>
-        <span class="product-amount"><i class="fa fa-plus"></i><input class="amount-input" type="text"><i
-                    class="fa fa-minus"></i></span>
-        <button class="white-bcg-button" id="buyButton" type="submit">Pridaj do kosika</button>
+        <form type="GET" class="add-to-cart" action="{{url('checkout1/addToCart')}}">
+        <span class="product-amount"><i class="fa fa-plus" onclick="increaseInput()"></i><input class="amount-input"
+                                                                                                type="text" name="amnt" value="1"><i
+                    class="fa fa-minus" onclick="decreaseInput()"></i></span>
+            <input type="hidden" value="{{$product->id}}" name="id">
+            <button class="white-bcg-button" id="buyButton" type="submit">Pridaj do kosika</button>
+        </form>
     </section>
     <section class="add-review">
         <h2>Pridaj recenziu</h2>
@@ -55,7 +59,8 @@
             <textarea class="new-review"></textarea>
             <span class="add-review-controls">
                     <span class="rating"><i class="fa fa-star checked"></i><i class="fa fa-star checked"></i><i
-                                class="fa fa-star checked"></i><i class="fa fa-star checked"></i><i class="fa fa-star"></i>
+                                class="fa fa-star checked"></i><i class="fa fa-star checked"></i><i
+                                class="fa fa-star"></i>
                     </span>
                     <button class="white-bcg-button" id="addReview" type="submit">Pridaj recenziu</button>
                 </span>

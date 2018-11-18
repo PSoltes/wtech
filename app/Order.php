@@ -8,7 +8,7 @@ class Order extends Model
 {
     public function products()
     {
-        return $this->belongsToMany('app\Product')->withTimestamps();
+        return $this->hasMany('app\Product')->withTimestamps()->withPivot('amount');
     }
     public function owner()
     {

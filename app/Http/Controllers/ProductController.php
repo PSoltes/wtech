@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
 
 class ProductController extends Controller
 {
@@ -97,11 +99,11 @@ class ProductController extends Controller
         } else {
             $product = Product::find($request->input('id'));
 
-            if (!$product) {
+           /* if (!$product) {
 
                 abort(404);
 
-            }
+            }*/
 
             $cart = session()->get('cart');
 
@@ -111,7 +113,7 @@ class ProductController extends Controller
                 $cart = [
                     $product->id => [
                         "name" => $product->name,
-                        "quantity" => $request->input('amnt'),
+                        "amount" => $request->input('amnt'),
                         "price" => $product->price,
                         "imgsource" => $product->imgsource
                     ]
@@ -125,7 +127,7 @@ class ProductController extends Controller
             // if cart not empty then check if this product exist then increment quantity
             if (isset($cart[$product->id])) {
 
-                $cart[$product->id]['quantity'] += $request->input('amnt');
+                $cart[$product->id]['amount'] += $request->input('amnt');
 
                 session()->put('cart', $cart);
 
@@ -136,7 +138,7 @@ class ProductController extends Controller
             // if item not exist in cart then add to cart with quantity = 1
             $cart[$product->id] = [
                 "name" => $product->name,
-                "quantity" => $request->input('amnt'),
+                "amount" => $request->input('amnt'),
                 "price" => $product->price,
                 "imgsource" => $product->imgsource
             ];
@@ -145,5 +147,43 @@ class ProductController extends Controller
 
             return redirect()->back()->with('success', 'Product added to cart successfully!');
         }
+    }
+
+    public function updateCart(Request $request)
+    {
+        if (Auth::check()) {
+
+        } else {
+
+            if ($request->has('id') && $request->has('amount')) {
+                $cart = session()->get('cart');
+                $cart[$request->input('id')]['amount'] = $request->input('amount');
+                session()->put('cart', $cart);
+            }
+        }
+
+    }
+
+
+    public function deleteFromCart(Request $request)
+    {
+        file_put_contents("testMarha.txt", $request->input('id'));
+
+        if(Auth::check())
+        {
+
+        } else {
+            file_put_contents("testMarha.txt", $request->input('id'));
+            if($request->has('id'))
+            {
+                $cart = session()->get('cart');
+                if(isset($cart[$request->input('id')]))
+                {
+                    unset($cart[$request->input('id')]);
+                    session()->put('cart', $cart);
+                }
+            }
+        }
+
     }
 }

@@ -17,7 +17,7 @@
                     </h1>
                         <p class="product-desc">{{$product->description}}</p>
                         <p class="product-price">{{$product->price}}£</p>
-                    <form type="get" action="{{ url('product/addToCart') }}">
+                    <form type="get" action="{{ url('checkout1/addToCart') }}">
                         <input type="hidden" value="1" name="amnt">
                         <input type="hidden" value="{{$product->id}}" name="id">
                         <button class="white-bcg-button buy-product" type="submit">Pridaj do kosika</button>
@@ -32,10 +32,10 @@
                     <img class="d-block w-100" src="{{asset('img/carousel1_xl.jpg')}}" alt="First slide">
                 </div>
                 <div class="carousel-item">
-                    <img class="d-block w-100" src="{{asset('img/carousel2.jpg')}}" alt="Second slide">
+                    <img class="d-block w-100" src="{{asset('img/carousel2_.jpg')}}" alt="Second slide">
                 </div>
                 <div class="carousel-item">
-                    <img class="d-block w-100" src="{{asset('img/carousel3.jpg')}}" alt="Third slide">
+                    <img class="d-block w-100" src="{{asset('img/carousel3_.jpg')}}" alt="Third slide">
                 </div>
             </div>
             <a class="carousel-control-prev" href="#carouselExampleControls2" role="button" data-slide="prev">

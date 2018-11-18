@@ -23,7 +23,7 @@
                 @csrf
             </form>
         @endguest
-            <a class="link-topbar-small" role="button" href="checkout1.html">
+            <a class="link-topbar-small" role="button" href="{{url('checkout1')}}">
             <div class="link-topbar-big">Nakupny kosik</div>
             <i class="fa fa-shopping-cart"></i> </a>
         <div class="menu-topbar-small" role="button" id="menu-button" onclick="OpenNav()"><i class="fa fa-bars"></i>

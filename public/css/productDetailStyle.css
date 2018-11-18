@@ -8,7 +8,12 @@
     "smallImg1 smallImg1 smallImg2"
     "name name ratingBig"
     "desc desc desc"
-    "price amount buyButton";
+    "price addToCart addToCart";
+}
+.add-to-cart{
+    display: flex;
+    flex-direction: row;
+    grid-area: addToCart;
 }
 .content{
     margin: 0 2vw 0 2vw;
@@ -35,6 +40,7 @@
     grid-area: price;
 }
 .product-amount{
+    justify-self: start;
     grid-area: amount;
 }
 .product-amount input{
@@ -43,6 +49,8 @@
     margin: 0 1vw 0 1vw;
 }
 #buyButton{
+    margin-left: auto;
+    justify-self: end;
     grid-area: buyButton;
 }
 /*add review layout*/
@@ -87,7 +95,7 @@
         "mainImg mainImg smallImg2"
         "name name ratingBig"
         "desc desc desc"
-        "price amount buyButton";
+        "price addToCart addToCart";
     }
 
     .main-img{
@@ -129,7 +137,7 @@
         "mainImg mainImg smallImg2"
         "name name ratingBig"
         "desc desc desc"
-        "price amount buyButton";
+        "price addToCart";
     }
     .main-img{
         min-width: 37vw;
@@ -170,7 +178,7 @@
                 "mainImg mainImg smallImg2"
                 "name name ratingBig"
                 "desc desc desc"
-                "price amount buyButton";
+                "price addToCart addToCart";
     }
     .main-img{
         min-width: 37vw;
