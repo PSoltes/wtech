@@ -86,6 +86,8 @@
 
 .product-desc{
     grid-area: PDesc;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 .buy-product{
     grid-area: BuyButton;

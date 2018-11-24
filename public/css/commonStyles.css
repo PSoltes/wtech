@@ -21,6 +21,13 @@ html *{
     font-family: Karla;
 }
 /*common forms, buttons...*/
+.link-disabled {
+    pointer-events: none;
+    color: black;
+!important;
+    background-color: lightgray;
+!important;
+}
 .white-bcg-button{
     background-color: #252525;
     border: lightcoral solid 1px;
@@ -98,6 +105,7 @@ input{
 }
 .link-topbar-small{
     display: inline-block;
+    color: lightskyblue;!important;
 }
 .menu-topbar-small{
     display: inline-block;
@@ -114,16 +122,16 @@ input{
     background-color: #252525;
 
 }
-.left-ctg-menu ul, .top-ctg-menu ul{
+.left-ctg-menu ul, .top-ctg-menu ul, .profile-nav ul{
     list-style: none;
 }
-.left-ctg-menu a, .top-ctg-menu a {
+.left-ctg-menu a, .top-ctg-menu a, .profile-nav a{
     display: block;
     padding: 10px;
     border-bottom: lightgrey 1px solid;
     color: lightskyblue;
 }
-.left-ctg-menu li, .top-ctg-menu li{
+.left-ctg-menu li, .top-ctg-menu li, .profile-nav li{
     display: block;
 }
 .left-ctg-menu a:hover{
@@ -143,6 +151,21 @@ input{
     transition: 0.5s ease;
     -webkit-transition: 0.5s ease;
     z-index: 900000000;
+}
+
+.profile-nav{
+    display: block;
+    position: absolute;
+    top:0;
+    width: 0px;
+    right: 0;
+    background-color: #252525;
+    overflow-y: scroll;
+    overflow-x: visible;
+    transition: 0.5s ease;
+    -webkit-transition: 0.5s ease;
+    z-index: 900000001;
+
 }
 
 /*footer*/
@@ -233,7 +256,7 @@ input{
         grid-template-columns: repeat(3, 1fr);
     }
 
-    .top-navigation-bar-right i, .top-navigation-bar a{
+    .top-navigation-bar-right i, .top-navigation-bar a, .profile-nav i,.profile-nav a{
         font-size: 1.6vh;
     }
 
@@ -273,7 +296,7 @@ input{
         display: grid;
         grid-template-columns: repeat(3, 1fr);
     }
-    .top-navigation-bar-right i, .top-navigation-bar a{
+    .top-navigation-bar-right i, .top-navigation-bar a, .profile-nav i,.profile-nav a{
         font-size: 2vh;
     }
 

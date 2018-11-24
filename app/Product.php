@@ -8,12 +8,12 @@ class Product extends Model
 {
     public function users()
     {
-        return $this->belongsToMany('app\User')->withTimestamps()->withPivot('amount');
+        return $this->belongsToMany('App\User')->as('cart')->withTimestamps()->withPivot('amount');
     }
 
     public function orders()
     {
-        return $this->belongsToMany('app\Order')->withTimestamps()->withPivot('amount');
+        return $this->belongsToMany('App\Order')->withTimestamps()->withPivot('amount');
     }
 
     public function category()

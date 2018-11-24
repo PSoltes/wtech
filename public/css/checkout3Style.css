@@ -1,0 +1,130 @@
+.checkout-nav {
+    display: flex;
+    grid-area: cNav;
+    min-height: 10vh;
+    justify-self: center;
+    margin: auto;
+}
+
+.checkout-nav a {
+    display: inline-block;
+    vertical-align: center;
+    border: lightcoral solid 2px;
+    color: lightskyblue;
+    background-color: #252525;
+    margin: 2vw;
+    padding: 2vw;
+    max-width: 26vw;
+    border-radius: 10%;
+
+}
+
+.checkout-nav a:active {
+    background-color: lightcoral;
+    color: #252525;
+}
+
+.checkout-nav i {
+    display: inline-block;
+    vertical-align: center;
+}
+
+.checkout-address {
+    max-width: 70vw;
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    text-align: start;
+}
+
+.checkout-address label, .checkout-address input {
+    display: block;
+    min-width: 10vw;
+}
+
+#nextButton {
+    margin: 2vw auto 2vw auto;
+    grid-area: button;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
+    text-align: center;
+    margin: 0 1vw 0 1vw;
+}
+
+@media (min-width: 576px) and (max-width: 767px) {
+
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+
+    .checkout-address {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-column-gap: 1vw;
+    }
+
+}
+
+h2 {
+    grid-area: header;
+    justify-self: center;
+}
+
+@media (min-width: 992px) and (max-width: 1199px) {
+    .checkout-address {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-column-gap: 1vw;
+        grid-area: content;
+        margin: 2vw auto 2vw auto;
+    }
+
+    .left-ctg-menu {
+        display: block;
+        position: sticky;
+        top: 8vh;
+        text-align: start;
+    }
+
+    .content {
+        display: grid;
+        margin: 0;
+        justify-items: initial;
+        grid-template-columns: 1.5fr 2.5fr;
+        grid-auto-rows: minmax(min-content, max-content);
+        grid-template-areas: "menu cNav" "menu header" "menu content" "menu button"
+    }
+
+}
+
+@media (min-width: 1200px) {
+
+    .checkout-address {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-column-gap: 1vw;
+        grid-area: content;
+        margin: 2vw auto 2vw auto;
+    }
+
+    .left-ctg-menu {
+        display: block;
+        position: sticky;
+        top: 8vh;
+        text-align: start;
+    }
+
+    .content {
+        display: grid;
+        margin: 0;
+        justify-items: initial;
+        grid-template-columns: 0.83fr 2.5fr;
+        grid-auto-rows: minmax(min-content, max-content);
+        grid-template-areas: "menu cNav" "menu header" "menu content" "menu button"
+    }
+
+}

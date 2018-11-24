@@ -1,0 +1,138 @@
+.content {
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
+    margin: 0 1vw 0 1vw;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
+    grid-area: form;
+}
+
+.checkout-nav {
+    display: flex;
+    grid-area: cNav;
+    min-height: 10vh;
+    justify-self: center;
+    margin: 5vh auto 5vh auto;
+    text-align: center;
+}
+
+.checkout-nav a {
+    display: inline-block;
+    vertical-align: center;
+    border: lightcoral solid 2px;
+    color: lightskyblue;
+    background-color: #252525;
+    margin: 2vw;
+    padding: 2vw;
+    max-width: 26vw;
+    border-radius: 10%;
+
+}
+
+.checkout-nav a:active {
+    background-color: lightcoral;
+    color: #252525;
+}
+
+.checkout-nav i {
+    display: inline-block;
+    vertical-align: center;
+}
+
+.checkout-delivery, .checkout-payment {
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
+    margin: 2vw auto 2vw auto;
+}
+
+.checkout-delivery {
+    grid-area: content1;
+}
+
+.checkout-payment {
+    grid-area: content2;
+}
+
+#nextButton {
+    justify-self: center;
+    margin: 5vh auto 5vh auto;
+    grid-area: button;
+}
+
+@media (min-width: 576px) and (max-width: 767px) {
+
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+    .checkout-delivery, .checkout-payment {
+        justify-content: center;
+
+    }
+
+    form {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-areas: "content1 content2" "button button";
+    }
+
+}
+
+@media (min-width: 992px) and (max-width: 1199px) {
+
+    .checkout-delivery, .checkout-payment {
+        justify-content: center;
+
+    }
+
+    .left-ctg-menu {
+        display: block;
+        position: sticky;
+        top: 8vh;
+    }
+
+    .content {
+        margin: 0;
+        justify-items: initial;
+        display: grid;
+        grid-template-columns: 1.5fr 1.25fr 1.25fr;
+        grid-auto-rows: minmax(min-content, max-content);
+        grid-template-areas: "menu cNav cNav" "menu form form" ". form form"
+    }
+
+    form {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-areas: "content1 content2" "button button";
+    }
+
+}
+
+@media (min-width: 1200px) {
+    .left-ctg-menu {
+        display: block;
+        position: sticky;
+        top: 8vh;
+    }
+
+    .content {
+        margin: 0;
+        display: grid;
+        justify-items: initial;
+        grid-template-columns: 1fr 1.5fr 1.5fr;
+        grid-auto-rows: minmax(min-content, max-content);
+        grid-template-areas: "menu cNav cNav" "menu form form" ". form form"
+    }
+
+    form {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-areas: "content1 content2" "button button";
+    }
+
+}

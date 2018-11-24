@@ -44,9 +44,11 @@
         <p class="product-desc"><?php echo e($product->description); ?></p>
         <span class="product-price"><?php echo e($product->price); ?>£</span>
         <form type="GET" class="add-to-cart" action="<?php echo e(url('checkout1/addToCart')); ?>">
-        <span class="product-amount"><i class="fa fa-plus" onclick="increaseInput()"></i><input class="amount-input"
-                                                                                                type="text" name="amnt" value="1"><i
-                    class="fa fa-minus" onclick="decreaseInput()"></i></span>
+        <span class="product-amount"><i class="fa fa-minus" onclick="decreaseInput()"></i><input class="amount-inputt"
+                                                                                                 type="text" name="amnt"
+                                                                                                 value="1"
+                                                                                                 id="<?php echo e('id' . $product->id); ?>"><i
+                    class="fa fa-plus" onclick="increaseInput()"></i></span>
             <input type="hidden" value="<?php echo e($product->id); ?>" name="id">
             <button class="white-bcg-button" id="buyButton" type="submit">Pridaj do kosika</button>
         </form>
