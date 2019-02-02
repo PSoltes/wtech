@@ -6,12 +6,15 @@ use Illuminate\Database\Eloquent\Model;
 
 class Order extends Model
 {
+    protected $fillable = ['id', 'user_id', 'name', 'address', 'city', 'postcode', 't_number'];
+
     public function products()
     {
-        return $this->hasMany('app\Product')->withTimestamps()->withPivot('amount');
+        return $this->belongsToMany(Product::class)->withTimestamps()->withPivot('amount');
     }
-    public function owner()
+
+    public function user()
     {
-        return $this->belongsTo('app\User');
+        return $this->belongsTo(User::class);
     }
 }

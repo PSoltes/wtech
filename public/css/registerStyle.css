@@ -2,7 +2,9 @@
 .main-forms {
     margin: 10px;
 }
-
+.alert-box{
+    grid-area: alert;
+}
 .main-forms-column1 {
     display: grid;
     grid-area: column1;
@@ -27,8 +29,8 @@
 
 .main-forms-wrapper-outer {
     display: grid;
-    grid-template-rows: 2fr 3fr 1fr;
-    grid-template-areas: "column1" "column2" "confButton";
+    grid-template-rows: auto 2fr 3fr 1fr;
+    grid-template-areas: "alert" "column1" "column2" "confButton";
 }
 
 .main-forms label {
@@ -67,8 +69,8 @@
         height: 100%;
         display: grid;
         grid-template-columns: 1fr 1fr;
-        grid-template-rows: 60vh 10vh;
-        grid-template-areas: "column1 column2" "confButton confButton";
+        grid-template-rows:  auto 60vh 10vh;
+        grid-template-areas: "alert alert" "column1 column2" "confButton confButton";
         justify-items: center;
     }
 
@@ -106,8 +108,8 @@
         height: 100%;
         display: grid;
         grid-template-columns: 1fr 1fr;
-        grid-template-rows: 65vh 10vh;
-        grid-template-areas: "column1 column2" "confButton confButton";
+        grid-template-rows: auto 65vh 10vh;
+        grid-template-areas: "alert alert" "column1 column2" "confButton confButton";
         justify-items: center;
     }
 

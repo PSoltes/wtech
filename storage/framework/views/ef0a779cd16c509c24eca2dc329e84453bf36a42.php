@@ -13,16 +13,9 @@
                 <div class="link-topbar-big">Prihlasenie</div>
                 <i class="fas fa-user-circle"></i> </a>
         <?php else: ?>
-            <a class="link-topbar-small" href="<?php echo e(route('logout')); ?>"
-               onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                <?php echo e(__('Logout')); ?>
-
-            </a>
-
-            <form id="logout-form" action="<?php echo e(route('logout')); ?>" method="POST" style="display: none;">
-                <?php echo csrf_field(); ?>
-            </form>
+            <div class="link-topbar-small" role="button" onclick="OpenLogin()">
+                <div class="link-topbar-big">Ahoj <?php echo e(Auth::user()->name); ?></div>
+                <i class="fas fa-user-circle"></i> </div>
         <?php endif; ?>
             <a class="link-topbar-small" role="button" href="<?php echo e(url('checkout1')); ?>">
             <div class="link-topbar-big">Nakupny kosik</div>
@@ -38,5 +31,26 @@
                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
             </ul>
         </nav>
+        <?php if(auth()->guard()->check()): ?>
+        <nav class="profile-nav">
+            <ul>
+                <li><a href="javascript:void(0)" class="closebtn" onclick="closeLogin()"><i class="fas fa-times"></i>
+                    </a></li>
+               <li><a href="#">Moj profil</a></li>
+                <li><a href="#">Moje objednavky</a></li>
+                <?php if(Auth::user()->isAdmin()): ?>
+                    <li><a href="http://127.0.0.1:8080">Admin rozhranie</a></li>
+                <?php endif; ?>
+               <li><a class="link-topbar-small" href="<?php echo e(route('logout')); ?>"
+                   onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                    <?php echo e(__('Logout')); ?></a>
+               </li>
+
+                <form id="logout-form" action="<?php echo e(route('logout')); ?>" method="POST" style="display: none;">
+                    <?php echo csrf_field(); ?>
+                </form>
+            </ul>
+        </nav>
+        <?php endif; ?>
     </div>
 </header>

@@ -60,40 +60,48 @@
     color:#252525;
     text-decoration: none;
 }
-.product-thumbnail{
-    display:grid;
+.product-thumbnail {
+    display: grid;
     grid-template-columns: 1fr 1fr;
-    grid-template-areas:
-            "TImg TImg"
-            "PName PName"
-            "PDesc PDesc"
-            "Price BuyButton";
+    grid-template-areas: "TImg TImg" "PName PName" "PDesc PDesc" "Price BuyButton";
+    grid-template-rows: 350px 100px 100px 70px;
     margin-bottom: 10px;
     padding: 5px;
     border: lightgrey solid 2px;
 }
-.product-thumbnail:hover{
+
+.product-thumbnail:hover {
     background-color: lightgrey;
 }
 
-.thumbnail-pic{
+.thumbnail-pic {
+    max-width: 300px;
     grid-area: TImg;
     justify-self: center;
+    overflow: hidden;
 }
-.product-name{
+.product-thumbnail img{
+    max-width: 300px;
+}
+
+.product-name {
     grid-area: PName;
 }
 
-.product-desc{
+.product-desc {
     grid-area: PDesc;
+    overflow: hidden;
+    height: 100px;
+    text-overflow: ellipsis;
 }
-.buy-product{
+
+.buy-product {
     grid-area: BuyButton;
     justify-self: end;
     margin: 5px;
-    z-index: 2;
 }
-.product-price{
+
+.product-price {
     grid-area: Price;
 }
 /*products-container*/

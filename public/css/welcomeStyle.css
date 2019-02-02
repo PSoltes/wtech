@@ -21,6 +21,7 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-areas: "TImg TImg" "PName PName" "PDesc PDesc" "Price BuyButton";
+    grid-template-rows: 300px 50px auto 70px;
     margin-bottom: 10px;
     padding: 5px;
     border: lightgrey solid 2px;
@@ -31,8 +32,12 @@
 }
 
 .thumbnail-pic {
+    max-width: 300px;
     grid-area: TImg;
     justify-self: center;
+}
+.product-thumbnail img{
+    max-width: 300px;
 }
 
 .product-name {
@@ -41,6 +46,9 @@
 
 .product-desc {
     grid-area: PDesc;
+    overflow: hidden;
+    height: 150px;
+    text-overflow: ellipsis;
 }
 
 .buy-product {
@@ -130,7 +138,7 @@
     .content {
         display: grid;
         grid-template-columns: 1fr 3fr;
-        grid-auto-rows: minmax(min-content, max-content);
+        grid-auto-rows: auto;
         grid-template-areas:
                 "menu productThmb"
                 ". productThmb"

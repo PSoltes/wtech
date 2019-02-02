@@ -2,9 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Category;
 use App\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Log;
+use Intervention\Image\ImageManagerStatic as Image;
+
+
 
 
 class ProductController extends Controller
@@ -12,9 +19,55 @@ class ProductController extends Controller
     /**
      * Display a listing of the resource.
      *
-     *
+     * @param \App\Product
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
+
+    public function list($page)
+    {
+
+        $rowsPerPage = request('rowsPerPage', 5);
+
+        // get sortBy from query parameters (after ?), if not set => name
+        $sortBy = request('sortBy', 'name');
+
+        // get descending from query parameters (after ?), if not set => false
+        $descendingBool = request('descending', 'false');
+        // convert descending true|false -> desc|asc
+        $descending = $descendingBool === 'true' ? 'desc' : 'asc';
+
+        // pagination
+        // IFF rowsPerPage == 0, load ALL rows
+        if ($rowsPerPage == 0) {
+            // load all products from DB
+            $products = DB::table('products')
+                ->orderBy($sortBy, $descending)
+                ->get();
+        } else {
+            $offset = ($page - 1) * $rowsPerPage;
+
+            // load products from DB
+            $products = DB::table('products')
+                ->orderBy($sortBy, $descending)
+                ->offset($offset)
+                ->limit($rowsPerPage)
+                ->get();
+        }
+
+        // total number of rows -> for quasar data table pagination
+        $rowsNumber = DB::table('products')->count();
+
+        return response()->json(['rows' => $products, 'rowsNumber' => $rowsNumber]);
+    }
+
+    public function categories()
+    {
+        $categories = Category::all();
+
+        return response()->json(['categories' => $categories]);
+    }
+
     public function index()
     {
 
@@ -38,7 +91,34 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        $product = new Product();
+        if($request->has('name'))$product->name = $request->input('name');
+        if($request->has('price'))$product->price = $request->input('price');
+        if($request->has('category'))$product->category = $request->input('category');
+        if($request->has('desc'))$product->description = $request->input('desc');
+        if($request->has('name')) {
+            $imgsource = $request->input('name');
+            $imgsource = strtolower($imgsource);
+            $imgsource = str_replace(' ', '', $imgsource);
+            $product->imgsource = $imgsource;
+        }
+        $product->amount = 0;
+        try {
+            $product->save();
+        }catch (\Exception $e)
+        {
+            file_put_contents('failedUpProduct.txt', $e);
+        }
+
+        return response('Produkt bol pridany', 200);
+    }
+
+    public function getProduct($id)
+    {
+        $product = Product::find($id);
+
+        return response()->json(['product' => $product]);
     }
 
     /**
@@ -70,120 +150,126 @@ class ProductController extends Controller
      * @param  \App\Product $product
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Product $product)
+    public function update(Request $request, $id)
     {
-        //
+
+        $product = Product::find($id);
+        if($request->has('name'))$product->name = $request->input('name');
+        if($request->has('price'))$product->price = $request->input('price');
+        if($request->has('category'))$product->category = $request->input('category');
+        if($request->has('desc'))$product->description = $request->input('desc');
+        $product->amount = 2500;
+        try {
+            $product->save();
+        }catch (\Exception $e)
+        {
+            Log::warning("Nepodarilo sa upravit produkt s vynimkou" . $e);
+            return response("Produkt sa nepodarilo upravit", 400);
+        }
+
+        return response("Produkt bol vytvoreny", 200);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Product $product
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Product $product)
+    public function destroy(Request $request)
     {
-        //
-    }
-
-    /**
-     * Display a listing of the resource.
-     *
-     * @param Request
-     * @return \Illuminate\Http\Response
-     */
-    public function addToCart(Request $request)
-    {
-        if (Auth::check()) {
-
-        } else {
-            $product = Product::find($request->input('id'));
-
-           /* if (!$product) {
-
-                abort(404);
-
-            }*/
-
-            $cart = session()->get('cart');
-
-            // if cart is empty then this the first product
-            if (!$cart) {
-
-                $cart = [
-                    $product->id => [
-                        "name" => $product->name,
-                        "amount" => $request->input('amnt'),
-                        "price" => $product->price,
-                        "imgsource" => $product->imgsource
-                    ]
-                ];
-
-                session()->put('cart', $cart);
-
-                return redirect()->back()->with('success', 'Product added to cart successfully!');
-            }
-
-            // if cart not empty then check if this product exist then increment quantity
-            if (isset($cart[$product->id])) {
-
-                $cart[$product->id]['amount'] += $request->input('amnt');
-
-                session()->put('cart', $cart);
-
-                return redirect()->back()->with('success', 'Product added to cart successfully!');
-
-            }
-
-            // if item not exist in cart then add to cart with quantity = 1
-            $cart[$product->id] = [
-                "name" => $product->name,
-                "amount" => $request->input('amnt'),
-                "price" => $product->price,
-                "imgsource" => $product->imgsource
-            ];
-
-            session()->put('cart', $cart);
-
-            return redirect()->back()->with('success', 'Product added to cart successfully!');
-        }
-    }
-
-    public function updateCart(Request $request)
-    {
-        if (Auth::check()) {
-
-        } else {
-
-            if ($request->has('id') && $request->has('amount')) {
-                $cart = session()->get('cart');
-                $cart[$request->input('id')]['amount'] = $request->input('amount');
-                session()->put('cart', $cart);
-            }
-        }
-
-    }
-
-
-    public function deleteFromCart(Request $request)
-    {
-        file_put_contents("testMarha.txt", $request->input('id'));
-
-        if(Auth::check())
-        {
-
-        } else {
-            file_put_contents("testMarha.txt", $request->input('id'));
-            if($request->has('id'))
+        try {
+            $idsToDelete = $request->input('ids');
+            DB::transaction( function() use($idsToDelete)
             {
-                $cart = session()->get('cart');
-                if(isset($cart[$request->input('id')]))
+                foreach ($idsToDelete as $id) {
+                    $product = Product::find($id);
+                    $url = public_path() . '/img/' . $product[0]->imgsource;
+                    $product[0]->delete();
+                    if(is_dir($url))
+                    {
+                        File::deleteDirectory($url);
+                    }
+                }
+            });
+
+            return response("Produkt bol uspesne vymazany", 200);
+
+        }catch(\Exception $e)
+        {
+            Log::warning("Nepodarilo sa vymazat produkt s touto vynimkou: " . $e);
+            return response( "Produkt sa nepodarilo vymazat", 400);
+        }
+
+    }
+
+    public function ImageUpload(Request $request)
+    {
+        try{
+            if($request->has('name')) {
+                $imgsource = $request->input('name');
+                $imgsource = strtolower($imgsource);
+                $imgsource = str_replace(' ', '', $imgsource);
+            }
+            if($request->hasFile('obr1')){
+                $myurl = public_path() .  '\\img\\' . $imgsource;
+                if(!file_exists($myurl . '\\sxs_main-img.jpg')){
+                    mkdir($myurl);
+                    $image = $request->file('obr1');
+                    $image_resize = Image::make($image->getRealPath());
+                    $image_resize->resize(950, null, function ($constraint) {
+                        $constraint->aspectRatio();
+                    });
+                    $image_resize->save(public_path() . '\\img\\' . $imgsource . '\\xl_main-img.jpg');
+                    $image_resize->resize(450, null, function ($constraint) {
+                        $constraint->aspectRatio();
+                    });
+                    $image_resize->save(public_path() . '\\img\\' . $imgsource . '\\m_main-img.jpg');
+                    $image_resize->resize(380, null, function ($constraint) {
+                        $constraint->aspectRatio();
+                    });
+                    $image_resize->save(public_path() . '\\img\\' . $imgsource . '\\l_main-img.jpg');
+                    $image_resize->resize(300, null, function ($constraint) {
+                        $constraint->aspectRatio();
+                    });
+                    $image_resize->save(public_path() . '\\img\\' . $imgsource . '\\sxs_main-img.jpg');
+                }
+                else if(!file_exists($myurl . '\\sxs_side-img.jpg'))
                 {
-                    unset($cart[$request->input('id')]);
-                    session()->put('cart', $cart);
+                    $image = $request->file('obr1');
+                    $image_resize = Image::make($image->getRealPath());
+                    $image_resize->resize(475, null, function ($constraint) {
+                        $constraint->aspectRatio();
+                    });
+                    $image_resize->save(public_path() . '\\img\\' . $imgsource . '\\xl_side-image.jpg');
+                    $image_resize->resize(225, null, function ($constraint) {
+                        $constraint->aspectRatio();
+                    });
+                    $image_resize->save(public_path() . '\\img\\' . $imgsource . '\\m_side-image.jpg');
+                    $image_resize->resize(190, null, function ($constraint) {
+                        $constraint->aspectRatio();
+                    });
+                    $image_resize->save(public_path() . '\\img\\' . $imgsource . '\\l_side-image.jpg');
+                    $image_resize->resize(150, null, function ($constraint) {
+                        $constraint->aspectRatio();
+                    });
+                    $image_resize->save(public_path() . '\\img\\' . $imgsource . '\\sxs_side-img.jpg');
+                }
+                else
+                {
+                    return response("Nepodarilo sa pridat obrazok, lebo produkt ma maximalny pocet obrazkov", 409);
                 }
             }
+
+            return response( "Obrazok pridany", 200);
+
+        }catch(\Exception $e)
+        {
+            Log::warning("Nepodarilo sa pridat obrazok s vynimkou " . $e);
+            return response("Nepodarilo sa pridat obrazok", 400);
         }
 
     }
+
+
 }

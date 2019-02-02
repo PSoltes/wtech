@@ -6,24 +6,23 @@
     <form method="POST" class="main-forms" action="{{ route('register') }}">
         @csrf
         <div class="main-forms-wrapper-outer">
+            @if($errors->any())
+                <div class="alert-box">
+                    <ul>
+                        @foreach($errors->all() as $error)
+                            <li>{{$error}}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
             <div class="main-forms-column1">
                 <h2>Prihlasovacie udaje</h2>
                 <div class="form-group">
                     <label for="email">Email login</label>
                     <input type="email" id="email" name="email" required>
-                    @if ($errors->has('email'))
-                        <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('email') }}</strong>
-                                    </span>
-                    @endif
 
                     <label for="password">Heslo</label>
                     <input type="password" id="password" name="password" required>
-                    @if ($errors->has('password'))
-                        <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('password') }}</strong>
-                                    </span>
-                    @endif
 
                     <label for="password-confirm">Zopakuj heslo</label>
                     <input type="password" id="password_confirmation" name="password_confirmation" required>

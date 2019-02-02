@@ -46,9 +46,11 @@
         <p class="product-desc">{{$product->description}}</p>
         <span class="product-price">{{$product->price}}£</span>
         <form type="GET" class="add-to-cart" action="{{url('checkout1/addToCart')}}">
-        <span class="product-amount"><i class="fa fa-plus" onclick="increaseInput()"></i><input class="amount-input"
-                                                                                                type="text" name="amnt" value="1"><i
-                    class="fa fa-minus" onclick="decreaseInput()"></i></span>
+        <span class="product-amount"><i class="fa fa-minus" onclick="decreaseInput()"></i><input class="amount-inputt"
+                                                                                                 type="text" name="amnt"
+                                                                                                 value="1"
+                                                                                                 id="{{'id'. $product->id}}"><i
+                    class="fa fa-plus" onclick="increaseInput()"></i></span>
             <input type="hidden" value="{{$product->id}}" name="id">
             <button class="white-bcg-button" id="buyButton" type="submit">Pridaj do kosika</button>
         </form>

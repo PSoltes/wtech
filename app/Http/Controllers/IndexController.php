@@ -14,8 +14,8 @@ class IndexController extends Controller
      */
     public function index()
     {
-        $products = Product::all();
-        return view('welcome', compact('products',$products));
+        $products = Product::limit(3)->get();
+        return view('welcome', compact('products', $products));
     }
 
     /**
@@ -31,7 +31,7 @@ class IndexController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -43,30 +43,33 @@ class IndexController extends Controller
      * Display the specified resource.
      *
      * @param \App\Product
-     * @param \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function show($categoryName, Request $request, Product $products)
     {
         $products = $products->newQuery();
-        if($request->has('order')){
+        if ($request->has('order')) {
             $products->orderBy('price', $request->input('order'));
         }
-        if(!empty($request->input('priceFrom'))){
-            $products->where('price', '>=', intval($request->input('priceFrom'),10));
+        if (!empty($request->input('priceFrom'))) {
+            $products->where('price', '>=', intval($request->input('priceFrom'), 10));
         }
-        if(!empty($request->input('priceTo'))){
-            $products->where('price', '<=', intval($request->input('priceTo'),10));
+        if (!empty($request->input('priceTo'))) {
+            $products->where('price', '<=', intval($request->input('priceTo'), 10));
         }
         $products = $products->where('category', $categoryName)->simplePaginate(12);
+        $filter = ['priceFrom' => $request->input('priceFrom'),
+            'priceTo' => $request->input('priceTo'),
+            'order' => $request->input('order')];
 
-        return view('category', compact('products', $products));
+        return view('category', compact('products', 'filter'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Product  $product
+     * @param  \App\Product $product
      * @return \Illuminate\Http\Response
      */
     public function edit(Product $product)
@@ -77,8 +80,8 @@ class IndexController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Product  $product
+     * @param  \Illuminate\Http\Request $request
+     * @param  \App\Product $product
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Product $product)
@@ -89,7 +92,7 @@ class IndexController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Product  $product
+     * @param  \App\Product $product
      * @return \Illuminate\Http\Response
      */
     public function destroy(Product $product)

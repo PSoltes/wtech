@@ -13,15 +13,9 @@
                 <div class="link-topbar-big">Prihlasenie</div>
                 <i class="fas fa-user-circle"></i> </a>
         @else
-            <a class="link-topbar-small" href="{{ route('logout') }}"
-               onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                {{ __('Logout') }}
-            </a>
-
-            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                @csrf
-            </form>
+            <div class="link-topbar-small" role="button" onclick="OpenLogin()">
+                <div class="link-topbar-big">Ahoj {{Auth::user()->name}}</div>
+                <i class="fas fa-user-circle"></i> </div>
         @endguest
             <a class="link-topbar-small" role="button" href="{{url('checkout1')}}">
             <div class="link-topbar-big">Nakupny kosik</div>
@@ -37,5 +31,26 @@
                     @endforeach
             </ul>
         </nav>
+        @auth
+        <nav class="profile-nav">
+            <ul>
+                <li><a href="javascript:void(0)" class="closebtn" onclick="closeLogin()"><i class="fas fa-times"></i>
+                    </a></li>
+               <li><a href="#">Moj profil</a></li>
+                <li><a href="#">Moje objednavky</a></li>
+                @if(Auth::user()->isAdmin())
+                    <li><a href="http://127.0.0.1:8080">Admin rozhranie</a></li>
+                @endif
+               <li><a class="link-topbar-small" href="{{ route('logout') }}"
+                   onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                    {{ __('Logout') }}</a>
+               </li>
+
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                    @csrf
+                </form>
+            </ul>
+        </nav>
+        @endauth
     </div>
 </header>

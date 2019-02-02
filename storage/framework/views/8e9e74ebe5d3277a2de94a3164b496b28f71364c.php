@@ -1,6 +1,6 @@
 <?php $__env->startSection('additional_dependencies'); ?>
     <link rel="stylesheet" href="<?php echo e(asset('css/loginStyle.css')); ?>">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('content'); ?>
@@ -46,10 +46,10 @@
                     <img class="d-block w-100" src="<?php echo e(asset('img/carousel1_xl.jpg')); ?>" alt="First slide">
                 </div>
                 <div class="carousel-item">
-                    <img class="d-block w-100" src="<?php echo e(asset('img/carousel2.jpg')); ?>" alt="Second slide">
+                    <img class="d-block w-100" src="<?php echo e(asset('img/carousel2_.jpg')); ?>" alt="Second slide">
                 </div>
                 <div class="carousel-item">
-                    <img class="d-block w-100" src="<?php echo e(asset('img/carousel3.jpg')); ?>" alt="Third slide">
+                    <img class="d-block w-100" src="<?php echo e(asset('img/carousel3_.jpg')); ?>" alt="Third slide">
                 </div>
             </div>
             <a class="carousel-control-prev" href="#carouselExampleControls2" role="button" data-slide="prev">

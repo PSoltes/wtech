@@ -5,24 +5,23 @@
     <form method="POST" class="main-forms" action="<?php echo e(route('register')); ?>">
         <?php echo csrf_field(); ?>
         <div class="main-forms-wrapper-outer">
+            <?php if($errors->any()): ?>
+                <div class="alert-box">
+                    <ul>
+                        <?php $__currentLoopData = $errors->all(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $error): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                            <li><?php echo e($error); ?></li>
+                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                    </ul>
+                </div>
+            <?php endif; ?>
             <div class="main-forms-column1">
                 <h2>Prihlasovacie udaje</h2>
                 <div class="form-group">
                     <label for="email">Email login</label>
                     <input type="email" id="email" name="email" required>
-                    <?php if($errors->has('email')): ?>
-                        <span class="invalid-feedback" role="alert">
-                                        <strong><?php echo e($errors->first('email')); ?></strong>
-                                    </span>
-                    <?php endif; ?>
 
                     <label for="password">Heslo</label>
                     <input type="password" id="password" name="password" required>
-                    <?php if($errors->has('password')): ?>
-                        <span class="invalid-feedback" role="alert">
-                                        <strong><?php echo e($errors->first('password')); ?></strong>
-                                    </span>
-                    <?php endif; ?>
 
                     <label for="password-confirm">Zopakuj heslo</label>
                     <input type="password" id="password_confirmation" name="password_confirmation" required>
